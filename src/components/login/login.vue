@@ -24,21 +24,35 @@ export default {
     }
   },
   methods: {
-    handleLogin() {
-      this.$http.post('login', this.formdata).then(res => {
-        const {
-          data,
-          meta: { msg, status }
-        } = res.data
-
-        if (status === 200) {
-          this.$router.push({ name: 'home' })
-          this.$message.success(msg)
-        } else {
-          this.$message.error(msg)
-        }
-      })
+    async handleLogin() {
+      const res = await this.$http.post('login', this.formdata)
+      const {
+        data,
+        meta: { msg, status }
+      } = res.data
+      if (status === 200) {
+        this.$router.push({ name: 'home' })
+        this.$message.success(msg)
+      } else {
+        this.$message.error(msg)
+      }
     }
+
+    // handleLogin() {
+    //   this.$http.post('login', this.formdata).then(res => {
+    //     const {
+    //       data,
+    //       meta: { msg, status }
+    //     } = res.data
+
+    //     if (status === 200) {
+    //       this.$router.push({ name: 'home' })
+    //       this.$message.success(msg)
+    //     } else {
+    //       this.$message.error(msg)
+    //     }
+    //   })
+    // }
   }
 }
 </script>
